@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-gradient {
+    @apply bg-gradient-to-r from-primary-gradient100 to-primary-gradient200;
+}
+
+body {
+    @apply bg-dark-100;
+}
