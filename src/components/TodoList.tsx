@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import { useState } from "react";
 interface Props {
   todos: {
     id: string;
@@ -10,9 +10,15 @@ interface Props {
 }
 
 const TodoList = ({ todos, deleteTodo }: Props) => {
+  const [todo, updateTodo] = useState(todos);
   
   const handleOnDragEnd = (result : any) => {
-    console.log(result)
+    if (!result.destination) return;
+    const items = Array.from(todo);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    updateTodo(items);
   };
 
 
