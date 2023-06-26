@@ -1,17 +1,25 @@
 import TodoItem from "./TodoItem";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState } from "react";
 interface Props {
   todos: {
     id: string;
     text: string;
+    isCompleted: boolean;
   }[];
   deleteTodo: (id: string) => void;
   handleOnDragEnd: (result: any) => void;
+  toggleTodo: (id: string) => void;
+  filter: string;
 }
 
-const TodoList = ({ todos, deleteTodo, handleOnDragEnd }: Props) => {
+const TodoList = ({ todos, deleteTodo, handleOnDragEnd, toggleTodo, filter }: Props) => {
 
+  const filterTodo = todos.filter((todo) => {
+    if (filter === "all") return todo;
+    if (filter === "active") return todo.isCompleted === false;
+    if (filter === "complete") return todo.isCompleted === true;
+  });
+  
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="todoList">
@@ -21,11 +29,11 @@ const TodoList = ({ todos, deleteTodo, handleOnDragEnd }: Props) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {todos.map((todo, index) => (
+            {filterTodo.map((todo, index) => (
               <Draggable draggableId={todo.id} key={todo.id} index={index}>
                 {(provided) => 
                   <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                    <TodoItem todo={todo} deleteTodo={deleteTodo} />
+                    <TodoItem todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
                   </div>
                 }
               </Draggable>

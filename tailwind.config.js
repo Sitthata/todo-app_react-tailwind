@@ -24,6 +24,7 @@ export default {
         600: "hsl(233, 14%, 35%)",
         700: "hsl(237, 14%, 26%)",
       },
+      white : "#fff",
     },
     extend: {},
   },
