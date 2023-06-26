@@ -2,6 +2,9 @@
 export default {
   content: ["./src/**/*.{html,js,ts,tsx,jsx}"],
   theme: {
+    screens: {
+      sm: "850px",
+    },
     colors: {
       primary: {
         100 : "hsl(220, 98%, 61%)",
