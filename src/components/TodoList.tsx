@@ -7,20 +7,10 @@ interface Props {
     text: string;
   }[];
   deleteTodo: (id: string) => void;
+  handleOnDragEnd: (result: any) => void;
 }
 
-const TodoList = ({ todos, deleteTodo }: Props) => {
-  const [todo, updateTodo] = useState(todos);
-  
-  const handleOnDragEnd = (result : any) => {
-    if (!result.destination) return;
-    const items = Array.from(todo);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    updateTodo(items);
-  };
-
+const TodoList = ({ todos, deleteTodo, handleOnDragEnd }: Props) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -40,6 +30,7 @@ const TodoList = ({ todos, deleteTodo }: Props) => {
                 }
               </Draggable>
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
