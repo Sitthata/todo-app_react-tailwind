@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{html,js,ts,tsx,jsx}"],
+  darkMode: "class",
   theme: {
     screens: {
       sm: "850px",
@@ -29,7 +30,12 @@ export default {
       },
       white : "#fff",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-pattern-dark': 'url("/images/bg-desktop-dark.jpg")',
+        'hero-pattern-light': 'url("/images/bg-desktop-light.jpg")',
+      },
+    },
   },
   plugins: [],
 };

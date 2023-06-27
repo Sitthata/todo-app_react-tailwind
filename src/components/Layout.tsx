@@ -4,6 +4,7 @@ import TodoList from "./TodoList";
 import TodoFooter from "./TodoFooter";
 import { useState } from "react";
 import EmptyTodo from "./EmptyTodo";
+import { useDarkMode } from "../Context/DarkModeProvider";
 
 interface Todo {
   id: string;
@@ -44,6 +45,8 @@ const Layout = () => {
 
     setTodos(items);
   };
+
+  
 
   return (
     <div className="flex flex-col justify-center mx-7 pt-[2.5rem] sm:max-w-[50rem] sm:mx-auto">

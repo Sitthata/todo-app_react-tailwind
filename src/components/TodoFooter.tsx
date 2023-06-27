@@ -1,4 +1,5 @@
 import { Paper } from "@mantine/core";
+import { useDarkMode } from "../Context/DarkModeProvider";
 
 interface Props {
   todos: { id: string; text: string; isCompleted: boolean }[];
@@ -10,9 +11,9 @@ interface Props {
 }
 
 const TodoFooter = ({ todos, setTodos, setFilter, filter }: Props) => {
-  const activeItem = todos.filter((todo) => todo.isCompleted === false).length;
   const filterOption = ["all", "active", "complete"];
   const allItem = todos.length;
+  const { darkMode } = useDarkMode();
 
   const handleClearCompleted = () => {
     setTodos(todos.filter((todo) => todo.isCompleted === false));
@@ -26,8 +27,7 @@ const TodoFooter = ({ todos, setTodos, setFilter, filter }: Props) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "hsl(235, 24%, 19%)",
-          borderBottom: "1px solid hsl(233, 14%, 35%)",
+          backgroundColor: darkMode ? "#FFF" : "hsl(235, 24%, 19%)",
           padding: ".625rem 1.5rem",
           color: "hsl(236, 9%, 61%)",
           borderRadius: "0px 0px 6px 6px",
@@ -51,7 +51,7 @@ const TodoFooter = ({ todos, setTodos, setFilter, filter }: Props) => {
       </Paper>
       
       {/* Mobile */}
-      <div className="flex items-center justify-center gap-10 py-4 mt-5 text-lg rounded-lg sm:hidden bg-dark-200">
+      <div className="flex items-center justify-center gap-10 py-4 mt-5 text-lg rounded-lg sm:hidden bg-dark-200 dark:bg-white">
         {filterOption.map((option, key) => (
           <button
             className={`capitalize transition-all duration-100 font-bold ${
